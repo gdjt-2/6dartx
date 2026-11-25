@@ -249,6 +249,18 @@
   .scrap{position:relative;min-height:300px}
   .scrap .s{position:absolute;left:var(--x);top:var(--y);height:var(--h);width:auto;transform:rotate(var(--r,0deg));user-select:none;pointer-events:none;-webkit-user-drag:none}
 
+  /* ---------- SMALL LOOPING VIDEO (stickers/welcome) ---------- */
+  .minivid{
+    position:absolute;
+    top:100px;        /* lines up with the top of the scroll section; bigger = lower */
+    left:0;          /* distance from the scroll section; bigger = further right */
+    width:560px;     /* window size: change this to make it bigger or smaller */
+    max-width:100%;
+    z-index:2;
+  }
+  .mini-title{font:18px Georgia,serif;color:#000;margin-bottom:3px;text-align:center}   /* the text above the video */
+  .minivid video{display:block;width:100%;background:#000;cursor:pointer}
+
   .viewer{
     display:none;
     position:absolute;
@@ -359,7 +371,7 @@
       min-height:0;
       max-width:none;
       margin:-60px 0 0;
-      padding:3px 24px 13px 70px;
+      padding:3px 24px 13px 35px;
     }
     .stage,.scrap{min-height:0}
 
@@ -405,6 +417,7 @@
 
   .lower{flex-direction:column;margin-top:-30px}
   .panel{flex:none;width:100%}
+  .minivid{position:static;width:100%;max-width:360px;margin:14px auto 0}   /* on phones the video sits under the list */
   .viewer{position:relative;right:auto;top:auto;margin-top:14px;box-shadow:none}
   .stage.open .scrap{display:none}
 }
@@ -446,6 +459,7 @@
     <div class="links">
       <a href="mailto:6dinbox@gmail.com">email</a>
       <a href="https://youtube.com/@6dchair" target="_blank" rel="noopener noreferrer">yt</a>
+      <a href="https://6dchair.bandcamp.com/" target="_blank" rel="noopener noreferrer">bandcamp</a>
       <a href="https://tiktok.com/@6dchair" target="_blank" rel="noopener noreferrer">tiktok</a>
       <a href="https://soundcloud.com/6dchair" target="_blank" rel="noopener noreferrer">soundcloud</a>
       <a href="https://instagram.com/6dchair" target="_blank" rel="noopener noreferrer">insta</a>
@@ -454,6 +468,18 @@
 
   <!-- the vacant right side: opened art / songs appear here -->
   <div class="stage" id="stage">
+
+    <!-- small looping video: the file lives in the stickers folder and is named "welcome".
+         If yours is not .mp4, rename it to welcome.mp4 (or fix the file name / extension below). -->
+    <div class="minivid">
+      <div class="mini-title">hiii irasshaimase ! click to play/pause</div>
+      <video id="miniVideo" autoplay loop playsinline disablepictureinpicture disableremoteplayback preload="auto">
+        <source src="stickers/welcome.mp4" type="video/mp4">
+        <source src="stickers/welcome.webm" type="video/webm">
+        <source src="stickers/welcome.mov" type="video/quicktime">
+      </video>
+    </div>
+
     <div class="scrap" id="scrap"></div>
 
     <div class="viewer" id="viewer">
@@ -891,6 +917,33 @@ $('viewer').addEventListener('touchend', e=>{
   if(Math.abs(d) < 50) return;
   d < 0 ? nextItem() : previousItem();
 }, {passive:true});
+
+/* ---------- WELCOME VIDEO: sound on, click the video to pause / play ---------- */
+(function(){
+  const mv = $('miniVideo');
+  if(!mv) return;
+
+  /* click or tap anywhere on the video: pause / play */
+  mv.addEventListener('click', ()=>{ mv.paused ? mv.play() : mv.pause(); });
+
+  /* try to start WITH sound. Browsers often refuse that until the visitor has clicked
+     something on the page, so if it is refused we start muted and turn the sound on
+     at the visitor's first click, tap or key press anywhere on the page. */
+  mv.muted = false;
+  const started = mv.play();
+  if(started && started.catch){
+    started.catch(()=>{
+      mv.muted = true;
+      mv.play().catch(()=>{});
+      const events = ['pointerdown','keydown','touchstart'];
+      const unmute = ()=>{
+        mv.muted = false;
+        events.forEach(ev => document.removeEventListener(ev, unmute, true));
+      };
+      events.forEach(ev => document.addEventListener(ev, unmute, true));
+    });
+  }
+})();
 
 /* ---------- TICKER: repeat the sentence so the loop is seamless ---------- */
 (function(){
