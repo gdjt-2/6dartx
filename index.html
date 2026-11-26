@@ -955,6 +955,26 @@ $('viewer').addEventListener('touchend', e=>{
   const mv = $('miniVideo');
   if(!mv) return;
 
+    /* position slider: drag it to jump to any moment */
+  const seek = $('miniSeek'), tm = $('miniTime');
+  let scrubbing = false;
+  const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); };
+  function paint(){
+    if(!isFinite(mv.duration)) return;
+    if(!scrubbing) seek.value = Math.round(mv.currentTime / mv.duration * 1000);
+    tm.textContent = fmt(mv.currentTime) + ' / ' + fmt(mv.duration);
+  }
+  mv.addEventListener('timeupdate', paint);
+  mv.addEventListener('loadedmetadata', paint);
+  seek.addEventListener('pointerdown', ()=>{ scrubbing = true; });
+  seek.addEventListener('input', ()=>{
+    if(!isFinite(mv.duration)) return;
+    mv.currentTime = seek.value / 1000 * mv.duration;
+    tm.textContent = fmt(mv.currentTime) + ' / ' + fmt(mv.duration);
+  });
+  ['pointerup','pointercancel','change'].forEach(ev => seek.addEventListener(ev, ()=>{ scrubbing = false; }));
+  
+
   /* click or tap anywhere on the video: pause / play */
   mv.addEventListener('click', ()=>{ mv.paused ? mv.play() : mv.pause(); });
 
