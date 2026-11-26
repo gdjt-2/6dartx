@@ -63,69 +63,68 @@
   .logo{position:absolute;top:8px;left:10px;z-index:20;color:var(--paper);font-size:12px;font-family:Georgia,serif}
 
   /* ---------- SEARCH (centered) ---------- */
-  /* ---------- SEARCH (centered) ---------- */
-.search{
-  position:absolute;
-  top:13px;
-  left:50%;
-  transform:translateX(-100%);
-  z-index:20;
-  width:min(600px,65vw);
-}
+  .search{
+    position:absolute;
+    top:13px;
+    left:50%;
+    transform:translateX(-100%);
+    z-index:20;
+    width:min(600px,65vw);
+  }
 
-.search .mag{
-  position:absolute;
-  left:11px;
-  top:8px;
-  width:16px;
-  height:16px;
-  color:#000;
-  opacity:.7;
-  pointer-events:none;
-}
+  .search .mag{
+    position:absolute;
+    left:11px;
+    top:8px;
+    width:16px;
+    height:16px;
+    color:#000;
+    opacity:.7;
+    pointer-events:none;
+  }
 
-.search input{
-  width:100%;
-  height:32px;
-  padding:0 30px 0 34px;
-  background:#fff;
-  color:#000;
-  border:0;
-  border-bottom:1px solid #020202;
-  font:bold 14px Verdana,Tahoma,sans-serif;
-  outline:none;
-  box-sizing:border-box;
-}
+  .search input{
+    width:100%;
+    height:32px;
+    padding:0 30px 0 34px;
+    background:#fff;
+    color:#000;
+    border:0;
+    border-bottom:1px solid #020202;
+    font:bold 14px Verdana,Tahoma,sans-serif;
+    outline:none;
+    box-sizing:border-box;
+  }
 
-.search input::placeholder{
-  color:#555;
-  opacity:.50;
-}
+  .search input::placeholder{
+    color:#555;
+    opacity:.50;
+  }
 
-.search input:focus{
-  border-bottom:2px solid #020202;
-}
+  .search input:focus{
+    border-bottom:2px solid #020202;
+  }
 
-/* hide the little dropdown triangle the browser adds for suggestions */
-.search input::-webkit-calendar-picker-indicator,
-.search input::-webkit-list-button{
-  display:none !important;
-  opacity:0;
-}
+  /* hide the little dropdown triangle the browser adds for suggestions */
+  .search input::-webkit-calendar-picker-indicator,
+  .search input::-webkit-list-button{
+    display:none !important;
+    opacity:0;
+  }
 
-.search .clear{
-  position:absolute;
-  right:10px;
-  top:6px;
-  color:#000;
-  cursor:pointer;
-  display:none;
-  font-size:14px;
-}
+  .search .clear{
+    position:absolute;
+    right:10px;
+    top:6px;
+    color:#000;
+    cursor:pointer;
+    display:none;
+    font-size:14px;
+  }
 
-.search .clear.on{
-  display:block;
-}
+  .search .clear.on{
+    display:block;
+  }
 
   /* ---------- TICKER (runs non-stop, just below the search bar) ---------- */
   .ticker{
@@ -179,6 +178,10 @@
     margin-bottom:20px;
   }
   .panel h3 small{display:block;font-size:9px;letter-spacing:.3px;color:#555;margin-top:2px;font-weight:normal}
+
+  /* wrapper around the list: invisible on desktop, holds the phone scroll bar on phones */
+  .newswrap{display:contents}
+  .mscroll{display:none}
 
   .news{
     position:relative;
@@ -239,8 +242,6 @@
   .news .more{margin-top:6px;color:var(--teal);font-size:13px;font-weight:bold;cursor:pointer}
 
   /* socials + email: plain underlined text */
-  /* .links{border-left:5px solid #888;padding-left:6px;margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;color:#222} */
-  /* .links a{text-decoration:underline;text-underline-offset:3px} */
   .links{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 36px;font-size:14px}
   .links a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 
@@ -258,30 +259,24 @@
     max-width:100%;
     z-index:2;
   }
-  /* .mini-title{font:14px Georgia,serif;color:#000;margin-bottom:3px;text-align:center;animation:miniColors 6s linear infinite}  */
+  /* the text above the video: bold, glowing, changes color in a loop */
   .mini-title{
-  font:bold 16px Verdana,sans-serif;
-  color:#000;
-  margin-bottom:3px;
-  text-align:left;
-  animation:miniColors 6s linear infinite;
-  text-shadow:0 0 4px currentColor;
-}
-    /* the text above the video */
-    @keyframes miniColors{
-  0%   {color:#FF2E93}   /* hot pink */
-  25%  {color:#1E3CFF}   /* electric blue */
-  50%  {color:#00A651}   /* arcade green */
-  75%  {color:#FF7A00}   /* orange */
-  100% {color:#FF2E93}
-}
-
+    font:bold 16px Verdana,sans-serif;
+    color:#000;
+    margin-bottom:3px;
+    text-align:left;
+    animation:miniColors 6s linear infinite;
+    text-shadow:0 0 4px currentColor;
+  }
+  @keyframes miniColors{
+    0%   {color:#FF2E93}   /* hot pink */
+    25%  {color:#1E3CFF}   /* electric blue */
+    50%  {color:#00A651}   /* arcade green */
+    75%  {color:#FF7A00}   /* orange */
+    100% {color:#FF2E93}
+  }
   .minivid video{display:block;width:100%;background:#000;cursor:pointer}
-
-
   .mini-seek{display:block;width:100%;margin-top:6px;accent-color:#000;cursor:pointer}
-/* .mini-time{font-size:12px;color:#444;text-align:right} */
-.minivid.min .mini-seek,.minivid.min .mini-time{display:none}   /* hidden while minimized */
 
   .viewer{
     display:none;
@@ -293,7 +288,6 @@
     border:1px solid #333;
     background:#fff;
     padding:10px;
-    /* box-shadow:-6px 6px 0 rgba(0,0,0,.18); */
     user-select:none;
   }
   .viewer[data-k="song"]{width:100%}
@@ -373,7 +367,6 @@
       min-width:460px;
       max-width:calc(100vw - 32px);
       z-index:900;
-      /* box-shadow:-8px 8px 0 rgba(0,0,0,.25); */
     }
     .viewer:not(.full) .v-media img{
       width:100%;
@@ -417,32 +410,51 @@
     .links{margin-top:16px;font-size:16px}
   }
 
-  /* @media(max-width:760px){
-    .search{top:36px;width:80vw}
-    .ticker{top:74px;height:32px}
-    .ticker-track span{font-size:16px}
-    .lower{flex-direction:column;margin-top:-30px}
+  /* ================= PHONES ================= */
+  @media(max-width:760px){
+    .hero{height:26vh;min-height:170px}          /* shorter header, so the stickers shrink too */
+
+    /* stickers can have a separate phone position (ym) */
+    .stickers .sticker{top:var(--ym,var(--y))}
+
+    .search{top:10px;left:50%;transform:translateX(-50%);width:70vw}
+    .search input{height:28px;font-size:12px;padding:0 26px 0 28px}
+    .search .mag{left:8px;top:6px;width:14px;height:14px}
+    .search .clear{top:5px;right:8px;font-size:12px}
+
+    .ticker{top:46px;height:28px}
+    .ticker-track span{font-size:14px}
+
+    /* heading + list sit lower, below the stickers that hang down (raise 14vh to go lower) */
+    .lower{flex-direction:column;margin-top:14vh}
     .panel{flex:none;width:100%}
+    .panel h3{background:#fff;font-size:18px}
+    .panel h3 small{font-size:11px;line-height:1.35}
+
+    /* smaller list text */
+    .news{font-size:13px;padding-right:34px;scrollbar-width:none}
+    .news .grp{font-size:16px}
+    .news .row b{font-size:14px}
+    .news .row .desc{font-size:12px}
+    .news .row .th{width:34px;height:34px}
+    .news .more{font-size:12px}
+    .links{font-size:13px;gap:6px 22px}
+
+    /* own scroll bar with arrows (phones hide the normal one) */
+    .news::-webkit-scrollbar{display:none;width:0}
+    .newswrap{display:block;position:relative}
+    .mscroll{display:flex;flex-direction:column;position:absolute;top:0;right:0;bottom:0;width:26px;background:#eee;border-left:1px solid #ccc}
+    .ms-btn{flex:none;height:26px;border:3px solid #eee;background:#999;color:#000;font-size:10px;line-height:1;padding:0}
+    .ms-track{flex:1;position:relative}
+    .ms-thumb{position:absolute;left:0;right:0;top:0;min-height:24px;background:#999;border:3px solid #eee}
+
+    /* smaller welcome text */
+    .mini-title{font-size:11px}
+
+    .minivid{position:static;width:100%;max-width:360px;margin:14px auto 0}   /* on phones the video sits under the list */
     .viewer{position:relative;right:auto;top:auto;margin-top:14px;box-shadow:none}
     .stage.open .scrap{display:none}
-  } */
-  @media(max-width:760px){
-  .hero{height:26vh;min-height:170px}          /* shorter header, so the stickers shrink too */
-
-  .search{top:10px;left:50%;transform:translateX(-50%);width:70vw}
-  .search input{height:28px;font-size:12px;padding:0 26px 0 28px}
-  .search .mag{left:8px;top:6px;width:14px;height:14px}
-  .search .clear{top:5px;right:8px;font-size:12px}
-
-  .ticker{top:46px;height:28px}
-  .ticker-track span{font-size:14px}
-
-  .lower{flex-direction:column;margin-top:-30px}
-  .panel{flex:none;width:100%}
-  .minivid{position:static;width:100%;max-width:360px;margin:14px auto 0}   /* on phones the video sits under the list */
-  .viewer{position:relative;right:auto;top:auto;margin-top:14px;box-shadow:none}
-  .stage.open .scrap{display:none}
-}
+  }
 </style>
 </head>
 
@@ -476,7 +488,14 @@
   <div class="panel">
     <h3>6dchairMINDVOMIT<small>i write guided by the 90sgrungegenz-restless-mentally-ill-unregulated-self-loathing spirit // Caraga, PH</small></h3>
 
-    <div class="news" id="news"></div>
+    <div class="newswrap">
+      <div class="news" id="news"></div>
+      <div class="mscroll">
+        <button type="button" class="ms-btn" id="msUp" aria-label="scroll up">▲</button>
+        <div class="ms-track"><div class="ms-thumb" id="msThumb"></div></div>
+        <button type="button" class="ms-btn" id="msDown" aria-label="scroll down">▼</button>
+      </div>
+    </div>
 
     <div class="links">
       <a href="mailto:6dinbox@gmail.com">email</a>
@@ -501,7 +520,6 @@
         <source src="stickers/welcome.mov" type="video/quicktime">
       </video>
       <input type="range" class="mini-seek" id="miniSeek" min="0" max="1000" value="0" step="1" aria-label="video position">
-<!-- <div class="mini-time" id="miniTime">0:00 / 0:00</div> -->
     </div>
 
     <div class="scrap" id="scrap"></div>
@@ -603,7 +621,7 @@ function embedFor(url){
   if(/soundcloud\.com\//i.test(url))
     return {type:'sc', src:`https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&auto_play=true&visual=true&show_comments=false`};
   if((m = url.match(/tiktok\.com\/.*\/video\/(\d+)/i)))
-  return {type:'tt', src:`https://www.tiktok.com/player/v1/${m[1]}?autoplay=1&muted=0&loop=0&controls=1`};
+    return {type:'tt', src:`https://www.tiktok.com/player/v1/${m[1]}?autoplay=1&muted=0&loop=0&controls=1`};
   if((m = url.match(/open\.spotify\.com\/(track|album|playlist|episode)\/(\w+)/i)))
     return {type:'sp', src:`https://open.spotify.com/embed/${m[1]}/${m[2]}`};
   return null;
@@ -644,7 +662,9 @@ SCRAP_STICKERS.forEach(t=>{
 
 /* ---------- HERO STICKERS ----------
    Put transparent PNG/WebP cutouts in a "stickers" folder next to index.html.
-   x / y = position inside the hero, h = height, r = rotation. Add or remove lines freely. */
+   x / y = position inside the hero, h = height, r = rotation. Add or remove lines freely.
+   Optional:  flip:'x' (mirror), flip:'y' (upside down), z:50 (on top),
+              ym:'30%' = a different vertical position on phones only. */
 const STICKERS = [
    {src:'stickers/fckingglands.png',       x:'0%',  y:'-60%', h:'200%', r:'0deg'},
      {src:'stickers/fckingglands.png',       x:'20%',  y:'-60%', h:'200%', r:'0deg'},
@@ -660,15 +680,10 @@ const STICKERS = [
 
     {src:'stickers/eb.png',       x:'60%',  y:'68%', h:'11%', r:'0deg', flip:'x'},
       {src:'stickers/eb.png',       x:'23%',  y:'37%', h:'20%', r:'0deg'},
-    
-     
+
       {src:'stickers/eb.png',       x:'67%',  y:'16%', h:'20%', r:'0deg'},
       {src:'stickers/eb.png',       x:'3.5%',  y:'3.5%', h:'9%', r:'0deg', flip:'x'},
        {src:'stickers/eb.png',       x:'88%',  y:'89.5%', h:'16%', r:'0deg', flip:'x'},
-
-  // {src:'stickers/fckingglands.png', x:'60%', y:'-40%', h:'200%', r:'-190deg'},
-  // {src:'stickers/glands.png',       x:'0%',  y:'-40%', h:'200%', r:'0deg'},
-  // {src:'stickers/fckingglands.png', x:'30%', y:'-50%', h:'200%', r:'-180deg'},
 
 //   {src:'stickers/cig_collage.png', x:'60%', y:'-10%', h:'200%', r:'-8deg'},
 //   {src:'stickers/forehead.png',    x:'50%', y:'5%',   h:'90%',  r:'-3deg'},
@@ -681,19 +696,11 @@ const STICKERS = [
 
   {src:'stickers/new3.png', x:'88%', y:'25%', h:'100%', r:'10deg'},
 
+  /* gifs: ym = lower position on phones, so the search bar does not cover it */
+  {src:'stickers/mygif.gif', x:'7%', y:'3%', ym:'26%', h:'30%', r:'0deg'},
 
-  {src:'stickers/mygif.gif', x:'7%', y:'3%', h:'30%', r:'0deg'}
+  {src:'stickers/mygif2.gif', x:'68%', y:'60%', h:'24%', r:'0deg'}
 ];
-
-// STICKERS.forEach(s=>{
-//   const img = document.createElement('img');
-//   img.className = 'sticker';
-//   img.src = s.src;
-//   img.alt = '';
-//   img.draggable = false;
-//   img.style.cssText = `--x:${s.x};--y:${s.y};--h:${s.h};--r:${s.r}`;
-//   $('stickers').appendChild(img);
-// });
 
 STICKERS.forEach(s=>{
   const img = document.createElement('img');
@@ -701,11 +708,10 @@ STICKERS.forEach(s=>{
   img.src = s.src;
   img.alt = '';
   img.draggable = false;
-  img.style.cssText = `--x:${s.x};--y:${s.y};--h:${s.h};--r:${s.r}`;
+  img.style.cssText = `--x:${s.x};--y:${s.y};--ym:${s.ym || s.y};--h:${s.h};--r:${s.r}`;
   img.style.transform = `rotate(${s.r || '0deg'}) scale(${/x/.test(s.flip||'') ? -1 : 1}, ${/y/.test(s.flip||'') ? -1 : 1})`;
+  if(s.z) img.style.zIndex = s.z;
   $('stickers').appendChild(img);
-
-  if(s.z) img.style.zIndex = s.z;s
 });
 
 /* ---------- SCROLL SECTION: music / art (also the search results) ---------- */
@@ -823,7 +829,6 @@ function showCurrentItem(){
     $('vSub').textContent = '';
   }else{
     vMedia.innerHTML = `<img src="${it.img}" alt="${esc(it.title)}">`;
-    // $('vSub').textContent = it.medium || '';
     $('vSub').textContent = '';
   }
   $('vTitle').textContent = it.title;      /* title only: the description stays in the list */
@@ -933,7 +938,6 @@ window.addEventListener('message', e=>{
 });
 
 
-
 /* ---------- FULL SCREEN (double-click the media, or the "full screen" link) ---------- */
 function toggleFull(force){
   const on = typeof force === 'boolean' ? force : !viewerEl.classList.contains('full');
@@ -977,14 +981,12 @@ $('viewer').addEventListener('touchend', e=>{
   const mv = $('miniVideo');
   if(!mv) return;
 
-    /* position slider: drag it to jump to any moment */
-  const seek = $('miniSeek'), tm = $('miniTime');
+  /* position slider: drag it to jump to any moment */
+  const seek = $('miniSeek');
   let scrubbing = false;
-  const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); };
   function paint(){
     if(!isFinite(mv.duration)) return;
     if(!scrubbing) seek.value = Math.round(mv.currentTime / mv.duration * 1000);
-    tm.textContent = fmt(mv.currentTime) + ' / ' + fmt(mv.duration);
   }
   mv.addEventListener('timeupdate', paint);
   mv.addEventListener('loadedmetadata', paint);
@@ -992,10 +994,8 @@ $('viewer').addEventListener('touchend', e=>{
   seek.addEventListener('input', ()=>{
     if(!isFinite(mv.duration)) return;
     mv.currentTime = seek.value / 1000 * mv.duration;
-    tm.textContent = fmt(mv.currentTime) + ' / ' + fmt(mv.duration);
   });
   ['pointerup','pointercancel','change'].forEach(ev => seek.addEventListener(ev, ()=>{ scrubbing = false; }));
-
 
   /* click or tap anywhere on the video: pause / play */
   mv.addEventListener('click', ()=>{ mv.paused ? mv.play() : mv.pause(); });
@@ -1017,6 +1017,26 @@ $('viewer').addEventListener('touchend', e=>{
       events.forEach(ev => document.addEventListener(ev, unmute, true));
     });
   }
+})();
+
+/* ---------- PHONE SCROLL BAR: arrows + position ---------- */
+(function(){
+  const nw = $('news'), up = $('msUp'), down = $('msDown'), th = $('msThumb');
+  if(!nw || !th) return;
+  function paint(){
+    const h = th.parentElement.clientHeight;
+    if(!h) return;                         /* hidden on desktop */
+    const tH = Math.max(24, h * Math.min(1, nw.clientHeight / nw.scrollHeight));
+    const max = nw.scrollHeight - nw.clientHeight;
+    th.style.height = tH + 'px';
+    th.style.top = (max > 0 ? nw.scrollTop / max * (h - tH) : 0) + 'px';
+  }
+  nw.addEventListener('scroll', paint, {passive:true});
+  window.addEventListener('resize', paint);
+  new MutationObserver(paint).observe(nw, {childList:true});
+  up.addEventListener('click',   ()=>nw.scrollBy({top:-nw.clientHeight*0.6, behavior:'smooth'}));
+  down.addEventListener('click', ()=>nw.scrollBy({top: nw.clientHeight*0.6, behavior:'smooth'}));
+  paint();
 })();
 
 /* ---------- TICKER: repeat the sentence so the loop is seamless ---------- */
