@@ -258,7 +258,24 @@
     max-width:100%;
     z-index:2;
   }
-  .mini-title{font:14px Georgia,serif;color:#000;margin-bottom:3px;text-align:center}   /* the text above the video */
+  /* .mini-title{font:14px Georgia,serif;color:#000;margin-bottom:3px;text-align:center;animation:miniColors 6s linear infinite}  */
+  .mini-title{
+  font:bold 16px Verdana,sans-serif;
+  color:#000;
+  margin-bottom:3px;
+  text-align:left;
+  animation:miniColors 6s linear infinite;
+  text-shadow:0 0 4px currentColor;
+}
+    /* the text above the video */
+    @keyframes miniColors{
+  0%   {color:#FF2E93}   /* hot pink */
+  25%  {color:#1E3CFF}   /* electric blue */
+  50%  {color:#00A651}   /* arcade green */
+  75%  {color:#FF7A00}   /* orange */
+  100% {color:#FF2E93}
+}
+
   .minivid video{display:block;width:100%;background:#000;cursor:pointer}
 
 
@@ -973,7 +990,7 @@ $('viewer').addEventListener('touchend', e=>{
     tm.textContent = fmt(mv.currentTime) + ' / ' + fmt(mv.duration);
   });
   ['pointerup','pointercancel','change'].forEach(ev => seek.addEventListener(ev, ()=>{ scrubbing = false; }));
-  
+
 
   /* click or tap anywhere on the video: pause / play */
   mv.addEventListener('click', ()=>{ mv.paused ? mv.play() : mv.pause(); });
