@@ -679,7 +679,10 @@ const STICKERS = [
   {src:'stickers/new1.png', x:'14%', y:'30%', h:'110%', r:'7deg'},
   {src:'stickers/new2.png', x:'72%', y:'0%',  h:'120%', r:'-5deg'},
 
-  {src:'stickers/new3.png', x:'88%', y:'25%', h:'100%', r:'10deg'}
+  {src:'stickers/new3.png', x:'88%', y:'25%', h:'100%', r:'10deg'},
+
+
+  {src:'stickers/mygif.gif', x:'10%', y:'5%', h:'30%', r:'0deg'}
 ];
 
 // STICKERS.forEach(s=>{
@@ -701,6 +704,8 @@ STICKERS.forEach(s=>{
   img.style.cssText = `--x:${s.x};--y:${s.y};--h:${s.h};--r:${s.r}`;
   img.style.transform = `rotate(${s.r || '0deg'}) scale(${/x/.test(s.flip||'') ? -1 : 1}, ${/y/.test(s.flip||'') ? -1 : 1})`;
   $('stickers').appendChild(img);
+
+  if(s.z) img.style.zIndex = s.z;s
 });
 
 /* ---------- SCROLL SECTION: music / art (also the search results) ---------- */
